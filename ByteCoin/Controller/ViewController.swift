@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, CoinManagerDelegate {
+class ViewController: UIViewController {
     
     var coinManager = CoinManager()
     
@@ -28,6 +28,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         currencyPicker.delegate = self
     }
     
+}
+//MARK: - CoinManagerDelegate
+
+extension ViewController: CoinManagerDelegate {
     
     func didUpdatePrice(_ coinManager: CoinManager, price: String, currency: String) {
         
@@ -40,7 +44,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func didFailWithError(error: Error) {
         print(error)
     }
+    
+}
+//MARK: - UIPickerViewDelegate and UIPickerVIewDataSource
 
+extension ViewController: UIPickerViewDelegate,UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -62,6 +70,5 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         coinManager.getCoinPrice(for: selectedCurrency)
         
     }
-
+    
 }
-
